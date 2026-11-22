@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA One Stop | กลุ่มบริหารทั่วไป โรงเรียนสตรีวัดระฆัง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#12306b; --navy-d:#0b2150; --navy-l:#e8edf8; --yellow:#f6c21c; --yellow-l:#fff6d6;
+  --bg:#f3f5fa; --card:#fff; --ink:#1a2238; --mute:#66708a; --line:#dfe4ef;
+  --ok:#1f8a4c; --ok-l:#e2f4e9; --warn:#b26a00; --warn-l:#fff0d4; --bad:#c0392b; --bad-l:#fde7e4; --info:#1d5fbf; --info-l:#e3eefc;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:Sarabun,system-ui,sans-serif;font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg)}
+h1,h2,h3,.brand b{font-family:Prompt,Sarabun,sans-serif;margin:0;line-height:1.3}
+h1{font-size:1.45rem} h2{font-size:1.1rem} h3{font-size:1rem}
+button,input,select,textarea{font:inherit;color:inherit}
+svg{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* layout */
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:4px solid var(--yellow)}
+.logo{width:38px;height:38px;border-radius:10px;background:var(--yellow);color:var(--navy-d);display:grid;place-items:center;font:700 .95rem Prompt,sans-serif;flex:none}
+.brand{flex:1;min-width:0;line-height:1.25}
+.brand b{display:block;font-size:1.02rem}
+.brand span{font-size:.8rem;opacity:.85;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who{display:flex;flex-direction:column;font-size:.7rem;opacity:.95;max-width:46vw}
+.who select{background:var(--navy-d);color:#fff;border:1px solid #ffffff55;border-radius:8px;padding:5px 6px;font-size:.85rem;max-width:100%}
+.shell{display:flex;max-width:1200px;margin:0 auto}
+nav{width:220px;flex:none;padding:18px 10px;position:sticky;top:62px;align-self:flex-start}
+nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:500;margin-bottom:2px}
+nav a:hover{background:var(--navy-l)}
+nav a.on{background:var(--navy);color:#fff}
+nav a .n{margin-left:auto;background:var(--yellow);color:var(--navy-d);font-size:.75rem;font-weight:700;border-radius:99px;padding:0 7px}
+main{flex:1;min-width:0;padding:20px 16px 60px}
+@media(max-width:820px){
+  nav{position:fixed;bottom:0;left:0;right:0;top:auto;width:auto;z-index:20;background:#fff;border-top:1px solid var(--line);display:flex;padding:4px;overflow-x:auto}
+  nav a{flex:1;flex-direction:column;gap:2px;font-size:.68rem;padding:6px 4px;min-width:58px;text-align:center;margin:0;position:relative}
+  nav a .n{position:absolute;top:2px;right:8px}
+  main{padding-bottom:90px}
+}
+
+/* components */
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.head p{margin:2px 0 0;color:var(--mute);font-size:.92rem}
+.head>div{flex:1;min-width:200px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn:hover{border-color:var(--navy)}
+.btn.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.pri:hover{background:var(--navy-d)}
+.btn.yel{background:var(--yellow);border-color:var(--yellow);color:var(--navy-d)}
+.btn.sm{padding:4px 10px;font-size:.88rem;border-radius:8px}
+.btn.ok{color:var(--ok)} .btn.no{color:var(--bad)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.two{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media(max-width:820px){.two{grid-template-columns:minmax(0,1fr)}}
+.svc{display:block;text-decoration:none;color:inherit;border-top:4px solid var(--navy);transition:.15s}
+.svc:hover{transform:translateY(-2px);box-shadow:0 6px 18px #12306b22}
+.svc .ic{width:42px;height:42px;border-radius:12px;background:var(--navy-l);color:var(--navy);display:grid;place-items:center;margin-bottom:8px}
+.svc .ic svg{width:24px;height:24px}
+.svc p{margin:2px 0 0;color:var(--mute);font-size:.88rem}
+.hero{background:linear-gradient(120deg,var(--navy),#1e4696);color:#fff;border:0;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:var(--yellow);opacity:.9}
+.hero p{margin:4px 0 0;opacity:.95;max-width:75%}
+.hero p.sm{font-size:.85rem;opacity:.8}
+.hero>*{position:relative;z-index:1}
+.hero h1{max-width:78%}
+@media(max-width:820px){.hero:after{width:84px;height:84px;right:-26px;top:-26px}.hero h1,.hero p{max-width:88%}}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;border-radius:99px;padding:1px 10px;white-space:nowrap}
+.t-wait{background:var(--warn-l);color:var(--warn)} .t-ok{background:var(--ok-l);color:var(--ok)}
+.t-bad{background:var(--bad-l);color:var(--bad)} .t-info{background:var(--info-l);color:var(--info)}
+.t-gray{background:#eceff5;color:var(--mute)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row.sp{justify-content:space-between}
+.mute{color:var(--mute);font-size:.9rem}
+.id{font:600 .8rem ui-monospace,monospace;color:var(--navy);background:var(--navy-l);border-radius:6px;padding:1px 6px}
+.acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.empty{text-align:center;color:var(--mute);padding:26px 10px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 14px;cursor:pointer;white-space:nowrap;font-weight:500}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* progress steps */
+.steps{display:flex;margin:12px 0 4px}
+.steps div{flex:1;text-align:center;font-size:.76rem;color:var(--mute);position:relative;padding-top:20px}
+.steps div:before{content:"";position:absolute;top:4px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#cfd6e4;z-index:1}
+.steps div:after{content:"";position:absolute;top:9px;left:-50%;width:100%;height:2px;background:#cfd6e4}
+.steps div:first-child:after{display:none}
+.steps .done{color:var(--ink);font-weight:600}
+.steps .done:before,.steps .done:after{background:var(--navy)}
+.steps .now:before{background:var(--yellow);box-shadow:0 0 0 3px var(--navy)}
+.etabox{background:var(--yellow-l);border-radius:10px;padding:8px 12px;font-size:.92rem;margin-top:8px}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center}
+.cal .dow{font-size:.75rem;color:var(--mute);padding:2px 0}
+.cal button{border:1px solid transparent;background:#f6f8fc;border-radius:8px;padding:5px 0 3px;cursor:pointer;min-height:44px}
+.cal button.today{border-color:var(--yellow);background:var(--yellow-l)}
+.cal button.sel{background:var(--navy);color:#fff}
+.cal .dots{display:flex;justify-content:center;gap:2px;height:7px;margin-top:1px}
+.cal .dots i{width:6px;height:6px;border-radius:50%}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--mute);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.slot{border-left:4px solid var(--navy);padding:6px 10px;background:#f6f8fc;border-radius:0 8px 8px 0;margin-bottom:6px;font-size:.93rem}
+
+/* forms / modal */
+.modal{position:fixed;inset:0;background:#0b215099;z-index:50;display:none;align-items:flex-start;justify-content:center;padding:20px 12px;overflow:auto}
+.modal.on{display:flex}
+.sheet{background:#fff;border-radius:16px;width:100%;max-width:560px;padding:18px}
+.sheet h2{margin-bottom:10px}
+label{display:block;font-weight:600;font-size:.9rem;margin:10px 0 3px}
+input[type=text],input[type=date],input[type=time],input[type=number],input[type=datetime-local],input[type=search],select,textarea{width:100%;border:1px solid #c9d0de;border-radius:9px;padding:8px 10px;background:#fff}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--yellow);outline-offset:1px;border-color:var(--navy)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;flex-wrap:wrap;gap:6px}
+.chk label{margin:0;font-weight:500;border:1px solid #c9d0de;border-radius:99px;padding:4px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.chk label:has(input:checked){background:var(--navy-l);border-color:var(--navy)}
+fieldset{border:1px solid var(--line);border-radius:12px;margin:12px 0 0;padding:4px 12px 12px}
+legend{font:600 .92rem Prompt,sans-serif;color:var(--navy);padding:0 6px}
+.msg{border-radius:9px;padding:7px 10px;font-size:.9rem;margin-top:8px}
+.msg.ok{background:var(--ok-l);color:var(--ok)} .msg.bad{background:var(--bad-l);color:var(--bad)} .msg.info{background:var(--info-l);color:var(--info)}
+.foot{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy-d);color:#fff;padding:10px 18px;border-radius:99px;z-index:60;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
+.toast.on{opacity:1}
+
+/* dashboard */
+.kpi b{display:block;font:700 1.9rem Prompt,sans-serif;color:var(--navy);line-height:1.1}
+.kpi span{color:var(--mute);font-size:.88rem}
+.bar{display:grid;grid-template-columns:minmax(90px,34%) 1fr 34px;gap:8px;align-items:center;font-size:.9rem;margin:7px 0}
+.bar div{height:12px;border-radius:99px;background:#e9edf5;overflow:hidden}
+.bar div i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.bar b{text-align:right}
+.demo{font-size:.82rem;color:var(--mute);text-align:center;margin-top:24px}
+.demo button{background:none;border:0;color:var(--info);text-decoration:underline;cursor:pointer;font-size:inherit}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">GA</div>
+  <div class="brand"><b>GA One Stop</b><span>กลุ่มบริหารทั่วไป โรงเรียนสตรีวัดระฆัง</span></div>
+  <label class="who" style="margin:0;font-weight:400">ทดลองใช้ในบทบาท
+    <select id="who" onchange="setUser(this.value)" aria-label="เลือกผู้ใช้สำหรับทดลอง"></select>
+  </label>
+</header>
+<div class="shell">
+  <nav id="nav" aria-label="เมนูหลัก"></nav>
+  <main id="main"></main>
+</div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============================================================
+   GA One Stop : ต้นแบบ (Prototype)
+   ข้อมูลทั้งหมดเก็บใน localStorage ของเบราว์เซอร์เครื่องนี้เท่านั้น
+   เมื่อใช้งานจริงให้เปลี่ยนฟังก์ชัน load()/save() ไปเรียก Google Apps Script
+   ============================================================ */
+const KEY='ga-one-stop-v3';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const day=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const TODAY=day(0);
+const thDate=s=>s?new Date(s.slice(0,10)+'T00:00').toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'2-digit'}):'-';
+const thLong=s=>new Date(s+'T00:00').toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const thDT=s=>thDate(s)+' '+s.slice(11,16)+' น.';
+
+const ICON={
+  home:'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+  repair:'<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.8 2.8-2.2-2.2z"/>',
+  room:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  van:'<path d="M2 16V7h12l5 4h3v5h-2M2 16h3m4 0h7"/><circle cx="7" cy="17" r="2"/><circle cx="18" cy="17" r="2"/>',
+  doc:'<path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7"/>',
+  dash:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  mine:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>', clip:'<path d="M20 11l-8.5 8.5a5 5 0 01-7-7L13 4a3.5 3.5 0 015 5l-8.5 8.5a2 2 0 01-3-3L14 7"/>'
+};
+const ic=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[n]}</svg>`;
+
+/* ---------- ข้อมูลหลัก (แก้ให้ตรงกับโรงเรียนได้ที่นี่) ---------- */
+const DEPTS=['ภาษาไทย','ภาษาต่างประเทศ','คณิตศาสตร์','วิทยาศาสตร์และเทคโนโลยี','การงานอาชีพ','ศิลปะ','สุขศึกษาและพลศึกษา','สังคมศึกษา','กิจกรรมพัฒนาผู้เรียน']; // 8 กลุ่มสาระฯ + 1 กิจกรรม (กลุ่มบริหารวิชาการ)
+const deptName=d=>d==='กิจกรรมพัฒนาผู้เรียน'?'กลุ่มกิจกรรมพัฒนาผู้เรียน':'กลุ่มสาระฯ '+d;
+const USERS=[ // ชื่อ-สกุลสมมติทั้งหมด
+  {id:'u1',name:'ครูสมใจ รักเรียน',dept:'ภาษาไทย',role:'teacher'},
+  {id:'u2',name:'ครูวิชัย ใจดี',dept:'วิทยาศาสตร์และเทคโนโลยี',role:'teacher'},
+  {id:'u3',name:'ครูมาลี ศรีสุข',dept:'คณิตศาสตร์',role:'teacher'},
+  {id:'u4',name:'ครูอารี มีสุข',dept:'ภาษาต่างประเทศ',role:'teacher'},
+  {id:'u5',name:'ครูธนา พัฒนกิจ',dept:'กิจกรรมพัฒนาผู้เรียน',role:'teacher'},
+  {id:'s1',name:'คุณนภา แสงทอง',nick:'คุณนภา',pos:'เจ้าหน้าที่กลุ่มบริหารทั่วไป',role:'staff'},
+  {id:'d1',name:'นายสมชาย ใจมั่น',nick:'ท่านรองฯ สมชาย',pos:'รองผู้อำนวยการกลุ่มบริหารทั่วไป',role:'dep_ga'},
+  {id:'d2',name:'นางวันเพ็ญ ศรีวิชา',nick:'ท่านรองฯ วันเพ็ญ',pos:'รองผู้อำนวยการกลุ่มบริหารวิชาการ',role:'dep',group:'กลุ่มบริหารวิชาการ'}
+];
+USERS.forEach(u=>{if(u.dept)u.pos='ครู '+deptName(u.dept)});
+const ROOMS={
+  yon:{name:'ห้องประชุมยลนที',cap:{chair:200,floor:300},color:'#12306b',note:'นั่งเก้าอี้ 150–200 คน / นั่งพื้น 300 คน'},
+  sar:{name:'ห้องประชุมสราญชล',cap:{chair:35,floor:35},color:'#e0a800',note:'ห้องขนาดกลาง 35 คน'}
+};
+const VANS={
+  1:{name:'รถตู้คันที่ 1',plate:'ฮภ 1195',seat:11,color:'#12306b'},
+  2:{name:'รถตู้คันที่ 2',plate:'1นฉ 8965',seat:11,color:'#e0a800'},
+  3:{name:'รถตู้ผู้บริหาร',plate:'ฮจ 8735',seat:6,color:'#1f8a4c',exec:true} // ครูใช้ได้เมื่อจำเป็นจริง ๆ
+};
+const VAN_LEAD=3, AV_LEAD=1; // จำนวนวันที่ต้องแจ้งล่วงหน้า
+const AV=['ไมโครโฟนไร้สาย','ไมโครโฟนตั้งโต๊ะ','เครื่องเสียง','โปรเจกเตอร์','โทรทัศน์','โน้ตบุ๊กประชุมออนไลน์','ช่างภาพ'];
+const GROUPS=['กลุ่มบริหารวิชาการ','กลุ่มบริหารงบประมาณ','กลุ่มบริหารงานบุคคล','กลุ่มบริหารทั่วไป'];
+const RSTAT=['รอรับเรื่อง','มอบหมายช่างแล้ว','กำลังซ่อม','รออะไหล่','ซ่อมเสร็จ'];
+const RCAT={it:'อุปกรณ์เทคโนโลยี',bld:'อาคารสถานที่/วัสดุ'};
+const DSTAGE=['รอรองฯ บริหารทั่วไปพิจารณา','รอกลุ่มบริหารมอบหมายผู้รับผิดชอบ','ส่งถึงครูผู้เกี่ยวข้องแล้ว'];
+
+/* ---------- ที่เก็บข้อมูล ---------- */
+let DB, me, cal={ym:TODAY.slice(0,7),sel:TODAY}, tab={};
+function seed(){
+  return {seq:{R:6,E:5,V:6,D:6,M:5},
+  minutes:[
+    {id:'M-0001',no:'1/2569',date:'2026-02-21',title:'ประชุมครูและบุคลากร',summary:'เตรียมการสอบปลายภาค การส่งผลการเรียน และกำหนดการปิดภาคเรียน',file:'รายงานการประชุม_1-2569.pdf',read:{u1:'2026-02-23',u2:'2026-02-23',u3:'2026-02-24',u4:'2026-02-25',u5:'2026-03-02'},created:'2026-02-22'},
+    {id:'M-0002',no:'2/2569',date:'2026-04-01',title:'ประชุมครูและบุคลากร',summary:'สรุปผลการดำเนินงานปีการศึกษาที่ผ่านมา และแผนการรับนักเรียนใหม่',file:'รายงานการประชุม_2-2569.pdf',read:{u1:'2026-04-02',u2:'2026-04-03',u3:'2026-04-03',u5:'2026-04-10'},created:'2026-04-02'},
+    {id:'M-0003',no:'3/2569',date:'2026-09-04',title:'ประชุมครูและบุคลากร',summary:'การสอบกลางภาค กิจกรรมวันสำคัญ และมาตรการความปลอดภัยในโรงเรียน',file:'รายงานการประชุม_3-2569.pdf',read:{u2:'2026-09-07',u3:'2026-09-08'},created:'2026-09-05'},
+    {id:'M-0004',no:'4/2569',date:day(-8),title:'ประชุมครูและบุคลากร',summary:'การเปิดภาคเรียนที่ 2 ปฏิทินงานวิชาการ และการใช้ระบบ GA One Stop',file:'รายงานการประชุม_4-2569.pdf',read:{u3:day(-6)},created:day(-7)}
+  ],
+  repairs:[
+    {id:'R-0001',cat:'it',item:'โปรเจกเตอร์ ห้อง 421',place:'อาคาร 4 ชั้น 2',detail:'เปิดติดแต่ภาพเป็นสีเหลืองทั้งจอ',by:'u1',created:day(-9),status:4,tech:'ช่างเอก (งานไอที)',eta:day(-5),doneAt:day(-5)},
+    {id:'R-0002',cat:'bld',item:'เครื่องปรับอากาศ ห้องพักครูภาษาไทย',place:'อาคาร 2 ชั้น 1',detail:'น้ำหยดและไม่เย็น',by:'u1',created:day(-6),status:3,tech:'ช่างสมชาย (อาคารสถานที่)',eta:day(4)},
+    {id:'R-0003',cat:'it',item:'คอมพิวเตอร์ครู ห้อง 315',place:'อาคาร 3 ชั้น 1',detail:'เปิดไม่ติด มีเสียงบี๊บยาว',by:'u2',created:day(-3),status:2,tech:'ช่างเอก (งานไอที)',eta:day(1)},
+    {id:'R-0004',cat:'bld',item:'ก๊อกน้ำห้องน้ำนักเรียน',place:'อาคาร 1 ชั้น 1',detail:'ก๊อกน้ำรั่ว ปิดไม่สนิท',by:'u3',created:day(-2),status:4,tech:'ช่างสมชาย (อาคารสถานที่)',eta:day(-1),doneAt:day(-1)},
+    {id:'R-0005',cat:'it',item:'ลำโพงห้องเรียน 224',place:'อาคาร 2 ชั้น 2',detail:'เสียงแตกและขาดเป็นช่วง',by:'u2',created:day(-1),status:0,tech:'',eta:''}
+  ],
+  events:[
+    {id:'E-0001',title:'ประชุมครูประจำเดือน',room:'yon',date:day(2),start:'15:30',end:'17:00',people:120,seat:'chair',av:['ไมโครโฟนไร้สาย','ไมโครโฟนตั้งโต๊ะ','เครื่องเสียง','โปรเจกเตอร์'],mic:2,dmic:4,note:'',by:'s1',status:'อนุมัติ',created:day(-4)},
+    {id:'E-0002',title:'ประชุมกลุ่มสาระฯ วิทยาศาสตร์',room:'sar',date:day(1),start:'13:00',end:'15:00',people:18,seat:'chair',av:['โทรทัศน์','โน้ตบุ๊กประชุมออนไลน์'],mic:0,note:'ประชุมออนไลน์ร่วมกับ สพม.',by:'u2',status:'อนุมัติ',created:day(-3)},
+    {id:'E-0003',title:'ค่ายรักการอ่าน ม.1',room:'yon',date:day(5),start:'08:30',end:'16:00',people:260,seat:'floor',av:['ไมโครโฟนไร้สาย','เครื่องเสียง','ช่างภาพ'],mic:4,photoN:2,photoType:['ภาพนิ่ง','วิดีโอ'],note:'',by:'u1',status:'รออนุมัติ',created:day(-1)},
+    {id:'E-0004',title:'อบรมการใช้สื่อดิจิทัล',room:'sar',date:TODAY,start:'09:00',end:'12:00',people:30,seat:'chair',av:['โปรเจกเตอร์'],mic:0,note:'',by:'u3',status:'อนุมัติ',created:day(-6)}
+  ],
+  vans:[
+    {id:'V-0001',van:1,start:day(1)+'T07:00',end:day(1)+'T16:00',dest:'สำนักงานเขตพื้นที่การศึกษาฯ',people:6,purpose:'ส่งเอกสารและประชุม',by:'u3',status:'อนุมัติ',created:day(-3)},
+    {id:'V-0002',van:2,start:day(3)+'T06:00',end:day(4)+'T18:00',dest:'จ.นครปฐม',people:11,purpose:'นำนักเรียนแข่งขันทักษะวิชาการ',by:'u2',status:'อนุมัติ',created:day(-2)},
+    {id:'V-0003',van:1,start:day(6)+'T08:00',end:day(6)+'T15:00',dest:'หอสมุดแห่งชาติ',people:10,purpose:'ศึกษาแหล่งเรียนรู้',by:'u1',status:'รออนุมัติ',created:day(-1)},
+    {id:'V-0004',van:2,start:TODAY+'T08:00',end:TODAY+'T12:00',dest:'ธนาคาร/ไปรษณีย์',people:2,purpose:'ติดต่อราชการ',by:'s1',status:'อนุมัติ',created:day(-4)},
+    {id:'V-0005',van:3,start:day(2)+'T08:00',end:day(2)+'T13:00',dest:'สพม.กรุงเทพมหานคร เขต 1',people:3,purpose:'ผู้บริหารเข้าร่วมประชุม',by:'d1',status:'อนุมัติ',created:day(-3)}
+  ],
+  docs:[
+    {id:'D-0001',no:'ศธ 04xxx/ว 1201',from:'สพม.กรุงเทพมหานคร เขต 1',subject:'การแข่งขันงานศิลปหัตถกรรมนักเรียน ระดับเขตพื้นที่',date:day(-8),urgent:'ด่วน',file:'ว1201_ศิลปหัตถกรรม.pdf',stage:2,group:'กลุ่มบริหารวิชาการ',order:'มอบกลุ่มบริหารวิชาการดำเนินการ',to:['u1','u2','u3'],read:{u2:day(-6)},created:day(-8)},
+    {id:'D-0002',no:'ศธ 04xxx/ว 1215',from:'สพฐ.',subject:'แนวทางการจัดกิจกรรมส่งเสริมการอ่าน ปีการศึกษา 2569',date:day(-5),urgent:'ปกติ',file:'ว1215_ส่งเสริมการอ่าน.pdf',stage:2,group:'กลุ่มบริหารวิชาการ',order:'มอบกลุ่มบริหารวิชาการ แจ้งกลุ่มสาระฯ ภาษาไทย',to:['u1'],read:{},created:day(-5)},
+    {id:'D-0003',no:'ศธ 04xxx/ว 1230',from:'สพม.กรุงเทพมหานคร เขต 1',subject:'ขอเชิญอบรมครูแกนนำวิทยาการคำนวณ',date:day(-2),urgent:'ด่วนที่สุด',file:'ว1230_อบรมวิทยาการคำนวณ.pdf',stage:1,group:'กลุ่มบริหารวิชาการ',order:'มอบกลุ่มบริหารวิชาการพิจารณาส่งครูเข้าอบรม',to:[],read:{},created:day(-2)},
+    {id:'D-0004',no:'กท 0xxx/4512',from:'สำนักงานเขตบางกอกน้อย',subject:'ขอความอนุเคราะห์ใช้สถานที่จัดกิจกรรมชุมชน',date:day(-1),urgent:'ปกติ',file:'4512_ขอใช้สถานที่.pdf',stage:0,group:'',order:'',to:[],read:{},created:day(-1)},
+    {id:'D-0005',no:'ศธ 04xxx/ว 1188',from:'สพฐ.',subject:'มาตรการรักษาความปลอดภัยในสถานศึกษา',date:day(-12),urgent:'ปกติ',file:'ว1188_ความปลอดภัย.pdf',stage:2,group:'กลุ่มบริหารทั่วไป',order:'แจ้งครูทุกท่านทราบและถือปฏิบัติ',to:['u1','u2','u3','u4','u5'],read:{u1:day(-11),u2:day(-11),u3:day(-10),u4:day(-9)},created:day(-12)}
+  ]};
+}
+function load(){try{DB=JSON.parse(localStorage.getItem(KEY))}catch(e){} if(!DB||!DB.repairs||!DB.minutes){DB=seed();save()}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+function resetDemo(){if(confirm('ล้างข้อมูลที่ทดลองกรอก แล้วกลับไปใช้ข้อมูลตัวอย่างชุดเดิม?')){DB=seed();save();render();toast('คืนค่าข้อมูลตัวอย่างแล้ว')}}
+const newId=p=>p+'-'+String(DB.seq[p]++).padStart(4,'0');
+const user=id=>USERS.find(u=>u.id===id)||{name:'-'};
+const isStaff=()=>me.role==='staff', isAdmin=()=>me.role!=='teacher', isDepGA=()=>me.role==='dep_ga', isTeacher=()=>me.role==='teacher';
+
+/* ---------- ส่วนประกอบร่วม ---------- */
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
+function openModal(html){$('#sheet').innerHTML=html;$('#modal').classList.add('on');const f=$('#sheet input,#sheet select,#sheet textarea');if(f)f.focus()}
+function closeModal(){$('#modal').classList.remove('on')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+const stTag=s=>`<span class="tag ${s==='อนุมัติ'?'t-ok':s==='ไม่อนุมัติ'?'t-bad':'t-wait'}">${s}</span>`;
+const tabsHtml=(k,list)=>`<div class="tabs">${list.map(([v,l])=>`<button class="${(tab[k]||list[0][0])===v?'on':''}" onclick="tab['${k}']='${v}';render()">${l}</button>`).join('')}</div>`;
+const fld=(f,n)=>f.querySelector(`[name="${n}"]`), fval=(f,n)=>fld(f,n).value.trim();
+
+function calendar(dotsFn){
+  const [y,m]=cal.ym.split('-').map(Number), first=new Date(y,m-1,1), n=new Date(y,m,0).getDate();
+  let h=`<div class="row sp" style="margin-bottom:8px"><button class="btn sm" onclick="calMove(-1)" aria-label="เดือนก่อนหน้า">‹</button><h3>${first.toLocaleDateString('th-TH',{month:'long',year:'numeric'})}</h3><button class="btn sm" onclick="calMove(1)" aria-label="เดือนถัดไป">›</button></div><div class="cal">`;
+  h+=['อา','จ','อ','พ','พฤ','ศ','ส'].map(d=>`<div class="dow">${d}</div>`).join('')+'<div></div>'.repeat(first.getDay());
+  for(let d=1;d<=n;d++){const ds=`${cal.ym}-${pad(d)}`;
+    h+=`<button class="${ds===TODAY?'today ':''}${ds===cal.sel?'sel':''}" onclick="cal.sel='${ds}';render()">${d}<span class="dots">${dotsFn(ds).map(c=>`<i style="background:${c}"></i>`).join('')}</span></button>`}
+  return h+'</div>';
+}
+function calMove(k){const [y,m]=cal.ym.split('-').map(Number),d=new Date(y,m-1+k,1);cal.ym=iso(d).slice(0,7);render()}
+
+/* ---------- เมนู / เส้นทาง ---------- */
+const PAGES=[['home','หน้าหลัก','home'],['repair','แจ้งซ่อม','repair'],['event','ห้องประชุม/โสตฯ','room'],['van','จองรถ','van'],['docs','สารบรรณ','doc'],['dash','ภาพรวม','dash']];
+function todo(){
+  const r={repair:0,event:0,van:0,docs:0,min:0};
+  if(isStaff()){r.repair=DB.repairs.filter(x=>x.status===0).length;r.docs=DB.docs.filter(x=>x.stage===1).length}
+  else if(isDepGA()){r.event=DB.events.filter(x=>x.status==='รออนุมัติ').length;r.van=DB.vans.filter(x=>x.status==='รออนุมัติ').length;r.docs=DB.docs.filter(x=>x.stage===0).length}
+  else if(me.role==='dep') r.docs=DB.docs.filter(x=>x.stage===1&&x.group===me.group).length;
+  else{r.min=DB.minutes.filter(m=>!m.read[me.id]).length;r.docs=DB.docs.filter(x=>x.to.includes(me.id)&&!x.read[me.id]).length+r.min}
+  return r;
+}
+function render(){
+  const page=(location.hash.slice(1)||'home'), t=todo();
+  $('#nav').innerHTML=PAGES.map(([k,l,i])=>`<a href="#${k}" class="${k===page?'on':''}">${ic(i)}<span>${l}</span>${t[k]?`<span class="n">${t[k]}</span>`:''}</a>`).join('');
+  ({home:pHome,repair:pRepair,event:pEvent,van:pVan,docs:pDocs,dash:pDash}[page]||pHome)(t);
+}
+function setUser(id){me=user(id);tab={};try{localStorage.setItem(KEY+'-me',id)}catch(e){}render()}
+window.addEventListener('hashchange',()=>{window.scrollTo(0,0);render()});
+
+/* ---------- ข้อความต้อนรับตามช่วงเวลา (แก้/เพิ่มข้อความได้ที่นี่) ---------- */
+const GREET=[
+  {from:5, to:9,  hi:['อรุณสวัสดิ์','สวัสดีตอนเช้า'], sub:['ขอให้วันนี้เป็นวันที่ดีของการสอน','เริ่มต้นวันใหม่ด้วยรอยยิ้ม นักเรียนรออยู่','เช้านี้มีอะไรให้ช่วยบ้าง']},
+  {from:9, to:12, hi:['สวัสดียามสาย','สวัสดี'], sub:['คาบเช้าเป็นอย่างไรบ้าง','มีเรื่องไหนให้กลุ่มบริหารทั่วไปช่วยดูแล บอกได้เลย','ทำงานไปด้วย ดื่มน้ำไปด้วยนะ']},
+  {from:12,to:13, hi:['พักเที่ยงแล้ว','สวัสดียามเที่ยง'], sub:['อย่าลืมทานข้าวก่อนนะ งานรอได้','พักสักนิด แล้วค่อยลุยต่อช่วงบ่าย']},
+  {from:13,to:16, hi:['สวัสดียามบ่าย','บ่ายนี้สู้ ๆ'], sub:['อีกไม่กี่คาบก็หมดวันแล้ว','มีอะไรค้างอยู่ จัดการให้เสร็จตรงนี้ได้เลย','ขอบคุณที่ทุ่มเทให้นักเรียนทุกวัน']},
+  {from:16,to:19, hi:['เย็นแล้ว','สวัสดียามเย็น'], sub:['วันนี้เหนื่อยไหม ขอบคุณสำหรับอีกหนึ่งวันของการสอน','เก็บงานอีกนิด แล้วกลับบ้านอย่างปลอดภัยนะ']},
+  {from:19,to:22, hi:['สวัสดียามค่ำ','ค่ำแล้ว'], sub:['ยังทำงานอยู่อีกหรือ อย่าหักโหมนะ','แวะมาเช็กงานสักนิด แล้วพักผ่อนเถอะ']},
+  {from:22,to:29, hi:['ดึกแล้ว','ยังไม่นอนอีกหรือ'], sub:['พักผ่อนบ้างนะ พรุ่งนี้ค่อยว่ากันใหม่','งานรอได้ สุขภาพครูสำคัญกว่า']}
+];
+const WEEKEND=['วันหยุดทั้งที ขอบคุณที่ยังแวะมา','วันหยุดแบบนี้ อย่าลืมให้เวลากับตัวเองด้วยนะ'];
+const RND=Math.random(), RND2=Math.random();
+const pick=(a,r)=>a[Math.floor(r*a.length)];
+function greeting(){const now=new Date(),h=now.getHours()<5?now.getHours()+24:now.getHours(),g=GREET.find(x=>h>=x.from&&h<x.to)||GREET[0];
+  const we=[0,6].includes(now.getDay());
+  return {hi:pick(g.hi,RND),sub:we&&h<19?pick(WEEKEND,RND2):pick(g.sub,RND2)}}
+
+/* ---------- หน้าหลัก ---------- */
+function pHome(t){
+  const mine=[
+    ...DB.repairs.filter(x=>x.by===me.id).map(x=>({id:x.id,t:x.item,s:`<span class="tag ${x.status===4?'t-ok':'t-info'}">${RSTAT[x.status]}</span>`,c:x.created,h:'repair'})),
+    ...DB.events.filter(x=>x.by===me.id).map(x=>({id:x.id,t:`${x.title} · ${ROOMS[x.room].name} ${thDate(x.date)}`,s:stTag(x.status),c:x.created,h:'event'})),
+    ...DB.vans.filter(x=>x.by===me.id).map(x=>({id:x.id,t:`${x.dest} · ${thDate(x.start)}`,s:stTag(x.status),c:x.created,h:'van'}))
+  ].sort((a,b)=>b.c.localeCompare(a.c));
+  const total=t.repair+t.event+t.van+t.docs;
+  const g=greeting(), who=me.nick||me.name.split(' ')[0];
+  const todoTxt=isTeacher()?(t.docs?`มีหนังสือราชการ ${t.docs-t.min} ฉบับ และรายงานการประชุม ${t.min} ฉบับ ที่ยังไม่ได้เปิดอ่าน`:'คุณอ่านหนังสือและรายงานการประชุมครบทุกฉบับแล้ว'):`มีงานรอคุณดำเนินการ ${total} รายการ`;
+  $('#main').innerHTML=`
+  <div class="card hero"><h1>${g.hi} ${esc(who)}</h1><p style="font-size:1.05rem">${g.sub}</p><p class="sm">${esc(me.pos)} · ${thLong(TODAY)}</p>
+    <p style="margin-top:10px"><b>${todoTxt}</b></p></div>
+  <div class="grid">
+    ${svc('repair','repair','แจ้งซ่อม','อุปกรณ์ไอที อาคาร วัสดุ ติดตามคิวและวันเสร็จได้',t.repair)}
+    ${svc('event','room','จองห้องประชุม + โสตฯ','ยลนที / สราญชล พร้อมอุปกรณ์และช่างภาพในฟอร์มเดียว',t.event)}
+    ${svc('van','van','จองรถโรงเรียน','ดูคิวรถตู้ 3 คันพร้อมเลขทะเบียน จองได้ทุกที่ทุกเวลา',t.van)}
+    ${svc('docs','doc','งานสารบรรณ','หนังสือราชการและรายงานการประชุม ค้นย้อนหลังได้ ไฟล์ไม่หมดอายุ',t.docs)}
+  </div>
+  <div class="card" style="margin-top:12px"><div class="row sp"><h2>${ic('mine')} เรื่องของฉัน</h2><span class="mute">${mine.length} รายการ</span></div>
+    ${mine.length?mine.slice(0,8).map(x=>`<a href="#${x.h}" class="row sp" style="padding:9px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit;margin-top:8px"><span><span class="id">${x.id}</span> ${esc(x.t)}</span>${x.s}</a>`).join(''):'<div class="empty">ยังไม่มีคำขอ เริ่มจากเลือกบริการด้านบน</div>'}
+  </div>
+  <p class="demo">ต้นแบบสำหรับนำเสนอ ข้อมูลทั้งหมดเป็นข้อมูลสมมติและบันทึกอยู่ในเบราว์เซอร์เครื่องนี้เท่านั้น · <button onclick="resetDemo()">คืนค่าข้อมูลตัวอย่าง</button></p>`;
+}
+const svc=(h,i,t,d,n)=>`<a class="card svc" href="#${h}"><div class="row sp"><div class="ic">${ic(i)}</div>${n?`<span class="tag t-wait">รอดำเนินการ ${n}</span>`:''}</div><h2>${t}</h2><p>${d}</p></a>`;
+
+/* ---------- 1) แจ้งซ่อม ---------- */
+function queuePos(r){return DB.repairs.filter(x=>x.cat===r.cat&&x.status<4).sort((a,b)=>a.created.localeCompare(b.created)||a.id.localeCompare(b.id)).findIndex(x=>x.id===r.id)+1}
+function pRepair(){
+  const f=tab.repair||(isStaff()?'all':'mine');
+  let list=DB.repairs.filter(x=>f==='mine'?x.by===me.id:f==='open'?x.status<4:true).sort((a,b)=>(a.status===4)-(b.status===4)||b.created.localeCompare(a.created));
+  $('#main').innerHTML=`<div class="head"><div><h1>แจ้งซ่อม</h1><p>แจ้งครั้งเดียว ติดตามสถานะ ลำดับคิว และวันที่คาดว่าจะเสร็จได้ตลอด</p></div>
+    <button class="btn pri" onclick="fRepair()">${ic('plus')} แจ้งซ่อมใหม่</button></div>
+  ${tabsHtml('repair',isStaff()?[['all','ทั้งหมด'],['open','ยังไม่เสร็จ'],['mine','ที่ฉันแจ้ง']]:[['mine','ที่ฉันแจ้ง'],['open','งานค้างทั้งโรงเรียน'],['all','ทั้งหมด']])}
+  ${list.length?list.map(repairCard).join(''):'<div class="card empty">ไม่มีรายการ</div>'}`;
+}
+function repairCard(r){
+  const step=r.status===0?0:r.status===1?1:r.status<4?2:3, labels=['แจ้งเรื่อง','มอบหมายช่าง',r.status===3?'รออะไหล่':'กำลังซ่อม','ซ่อมเสร็จ'];
+  const q=queuePos(r);
+  return `<div class="card"><div class="row sp"><span><span class="id">${r.id}</span> <span class="tag t-gray">${RCAT[r.cat]}</span></span>
+    <span class="tag ${r.status===4?'t-ok':r.status===3?'t-wait':'t-info'}">${RSTAT[r.status]}</span></div>
+  <h2 style="margin-top:6px">${esc(r.item)}</h2>
+  <div class="mute">${esc(r.place)} · ${esc(r.detail)}</div>
+  <div class="mute">แจ้งโดย ${esc(user(r.by).name)} เมื่อ ${thDate(r.created)}</div>
+  <div class="steps">${labels.map((l,i)=>`<div class="${i<=step?'done':''} ${i===step&&r.status<4?'now':''}">${l}</div>`).join('')}</div>
+  ${r.status===4?`<div class="etabox" style="background:var(--ok-l)">ซ่อมเสร็จเมื่อ <b>${thDate(r.doneAt)}</b> โดย ${esc(r.tech)}</div>`:
+    `<div class="etabox">ลำดับคิวของคุณ: <b>คิวที่ ${q}</b> ของงาน${RCAT[r.cat]} · ${r.eta?`คาดว่าจะเสร็จ <b>${thDate(r.eta)}</b>`:'รอเจ้าหน้าที่ระบุวันที่คาดว่าจะเสร็จ'}${r.tech?` · ผู้รับผิดชอบ ${esc(r.tech)}`:''}</div>`}
+  ${isStaff()&&r.status<4?`<div class="acts"><button class="btn sm pri" onclick="fRepairUpd('${r.id}')">อัปเดตสถานะ</button></div>`:''}</div>`;
+}
+function fRepair(){openModal(`<h2>แจ้งซ่อมใหม่</h2><form onsubmit="return sRepair(event)">
+  <label for="rc">ประเภท</label><select id="rc" name="cat"><option value="it">อุปกรณ์เทคโนโลยี (คอมพิวเตอร์ โปรเจกเตอร์ เครือข่าย)</option><option value="bld">อาคารสถานที่/วัสดุ (แอร์ ไฟฟ้า ประปา โต๊ะเก้าอี้)</option></select>
+  <label for="ri">สิ่งที่ชำรุด</label><input id="ri" type="text" name="item" required placeholder="เช่น โปรเจกเตอร์ ห้อง 421">
+  <label for="rp">สถานที่</label><input id="rp" type="text" name="place" required placeholder="อาคาร / ชั้น / ห้อง">
+  <label for="rd">อาการ</label><textarea id="rd" name="detail" rows="3" required placeholder="อธิบายอาการที่พบ"></textarea>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ส่งเรื่องแจ้งซ่อม</button></div></form>`)}
+function sRepair(e){e.preventDefault();const f=e.target,r={id:newId('R'),cat:fval(f,'cat'),item:fval(f,'item'),place:fval(f,'place'),detail:fval(f,'detail'),by:me.id,created:TODAY,status:0,tech:'',eta:''};
+  DB.repairs.push(r);save();closeModal();tab.repair='mine';render();toast(`รับเรื่องแล้ว เลขติดตาม ${r.id} · คิวที่ ${queuePos(r)}`);return false}
+function fRepairUpd(id){const r=DB.repairs.find(x=>x.id===id);openModal(`<h2>อัปเดตงานซ่อม ${r.id}</h2><p class="mute">${esc(r.item)}</p><form onsubmit="return sRepairUpd(event,'${id}')">
+  <label for="us">สถานะ</label><select id="us" name="status">${RSTAT.map((s,i)=>`<option value="${i}" ${i===Math.max(r.status,1)?'selected':''}>${s}</option>`).join('')}</select>
+  <label for="ut">ช่างผู้รับผิดชอบ</label><input id="ut" type="text" name="tech" value="${esc(r.tech)}" required placeholder="ชื่อช่าง">
+  <label for="ue">วันที่คาดว่าจะเสร็จ</label><input id="ue" type="date" name="eta" value="${r.eta||day(3)}" required>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">บันทึก</button></div></form>`)}
+function sRepairUpd(e,id){e.preventDefault();const f=e.target,r=DB.repairs.find(x=>x.id===id);r.status=+fval(f,'status');r.tech=fval(f,'tech');r.eta=fval(f,'eta');if(r.status===4)r.doneAt=TODAY;
+  save();closeModal();render();toast('อัปเดตแล้ว ผู้แจ้งจะเห็นสถานะใหม่ทันที');return false}
+
+/* ---------- 2+3) ห้องประชุม + โสตฯ ---------- */
+const evClash=(room,date,s,e,skip)=>DB.events.find(x=>x.id!==skip&&x.room===room&&x.date===date&&x.status!=='ไม่อนุมัติ'&&s<x.end&&x.start<e);
+function pEvent(){
+  const dayList=DB.events.filter(x=>x.date===cal.sel&&x.status!=='ไม่อนุมัติ').sort((a,b)=>a.start.localeCompare(b.start));
+  const f=tab.event||(isAdmin()?'wait':'mine');
+  const list=DB.events.filter(x=>f==='mine'?x.by===me.id:f==='wait'?x.status==='รออนุมัติ':x.date>=TODAY).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
+  $('#main').innerHTML=`<div class="head"><div><h1>จองห้องประชุม + งานโสตทัศนูปกรณ์</h1><p>จองห้อง อุปกรณ์ ช่างภาพ และรถตู้ ได้ในฟอร์มเดียว</p></div>
+    <button class="btn pri" onclick="fEvent()">${ic('plus')} จองห้องประชุม</button></div>
+  <div class="two"><div class="card">${calendar(ds=>[...new Set(DB.events.filter(x=>x.date===ds&&x.status!=='ไม่อนุมัติ').map(x=>ROOMS[x.room].color))])}
+    <div class="legend">${Object.values(ROOMS).map(r=>`<span><i style="background:${r.color}"></i>${r.name}</span>`).join('')}</div></div>
+  <div class="card"><h2>${thLong(cal.sel)}</h2>
+    ${Object.entries(ROOMS).map(([k,r])=>{const l=dayList.filter(x=>x.room===k);return `<h3 style="margin:12px 0 6px">${r.name} <span class="mute" style="font-weight:400">(${r.note})</span></h3>${l.length?l.map(x=>`<div class="slot" style="border-color:${r.color}"><b>${x.start}–${x.end} น.</b> ${esc(x.title)} ${stTag(x.status)}</div>`).join(''):'<div class="msg ok">ว่างทั้งวัน</div>'}`}).join('')}
+    <div class="acts"><button class="btn sm yel" onclick="fEvent('${cal.sel}')">จองวันนี้</button></div></div></div>
+  ${tabsHtml('event',isAdmin()?[['wait','รออนุมัติ'],['up','กำลังจะมาถึง'],['mine','ที่ฉันจอง']]:[['mine','ที่ฉันจอง'],['up','กำลังจะมาถึง']])}
+  ${list.length?list.map(eventCard).join(''):'<div class="card empty">ไม่มีรายการ</div>'}`;
+}
+const avText=x=>x.av.map(a=>a==='ไมโครโฟนไร้สาย'?`${a} ${x.mic||1} ตัว`:a==='ไมโครโฟนตั้งโต๊ะ'?`${a} ${x.dmic||1} ตัว`:a==='ช่างภาพ'?`ช่างภาพ ${x.photoN||1} คน (${(x.photoType||['ภาพนิ่ง']).join(' + ')})`:a);
+function eventCard(x){const av=avText(x);
+  return `<div class="card"><div class="row sp"><span><span class="id">${x.id}</span> <span class="tag t-gray">${ROOMS[x.room].name}</span></span>${stTag(x.status)}</div>
+  <h2 style="margin-top:6px">${esc(x.title)}</h2>
+  <div class="mute">${thDate(x.date)} เวลา ${x.start}–${x.end} น. · ${x.people} คน (${x.seat==='floor'?'นั่งพื้น':'นั่งเก้าอี้'}) · จองโดย ${esc(user(x.by).name)}</div>
+  <div class="mute"><b>งานโสตฯ:</b> ${av.length?esc(av.join(', ')):'ไม่ขอใช้อุปกรณ์'}${x.note?' · หมายเหตุ: '+esc(x.note):''}${x.vanId?` · <b>รถตู้:</b> คำขอ ${x.vanId}`:''}</div>
+  ${isDepGA()&&x.status==='รออนุมัติ'?`<div class="acts"><button class="btn sm ok" onclick="setSt('events','${x.id}','อนุมัติ')">อนุมัติ</button><button class="btn sm no" onclick="setSt('events','${x.id}','ไม่อนุมัติ')">ไม่อนุมัติ</button></div>`:''}
+  ${x.by===me.id&&x.status==='รออนุมัติ'?`<div class="acts"><button class="btn sm no" onclick="cancelReq('events','${x.id}')">ยกเลิกคำขอ</button></div>`:''}</div>`}
+function setSt(col,id,st){DB[col].find(x=>x.id===id).status=st;save();render();toast(`${st}แล้ว ผู้จองจะเห็นผลทันที`)}
+function cancelReq(col,id){if(!confirm('ยกเลิกคำขอนี้?'))return;const x=DB[col].find(y=>y.id===id);DB[col]=DB[col].filter(y=>y.id!==id);if(x.vanId)DB.vans=DB.vans.filter(v=>v.id!==x.vanId);save();render();toast('ยกเลิกคำขอแล้ว')}
+function fEvent(d){openModal(`<h2>จองห้องประชุม</h2><form onsubmit="return sEvent(event)" oninput="chkEvent(this)">
+  <fieldset><legend>1 · ห้องและเวลา</legend>
+  <label for="et">ชื่องาน/กิจกรรม</label><input id="et" type="text" name="title" required placeholder="เช่น ประชุมกลุ่มสาระฯ">
+  <div class="f2"><div><label for="er">ห้อง</label><select id="er" name="room">${Object.entries(ROOMS).map(([k,r])=>`<option value="${k}">${r.name}</option>`).join('')}</select></div>
+  <div><label for="ed">วันที่</label><input id="ed" type="date" name="date" value="${d&&d>=TODAY?d:day(1)}" min="${TODAY}" required></div></div>
+  <div class="f2"><div><label for="es">เริ่ม</label><input id="es" type="time" name="start" value="09:00" required></div><div><label for="ee">สิ้นสุด</label><input id="ee" type="time" name="end" value="12:00" required></div></div>
+  <div class="f2"><div><label for="ep">จำนวนผู้เข้าร่วม</label><input id="ep" type="number" name="people" min="1" value="30" required></div>
+  <div><label for="ex">รูปแบบที่นั่ง</label><select id="ex" name="seat"><option value="chair">นั่งเก้าอี้</option><option value="floor">นั่งพื้น</option></select></div></div>
+  <div id="evmsg"></div></fieldset>
+  <fieldset><legend>2 · อุปกรณ์โสตฯ และช่างภาพ</legend>
+  <p class="mute" style="margin:6px 0">ต้องแจ้งล่วงหน้าอย่างน้อย ${AV_LEAD} วัน</p>
+  <div class="chk">${AV.map(a=>`<label><input type="checkbox" name="av" value="${a}">${a}</label>`).join('')}</div>
+  <div class="f2"><div id="b-mic" hidden><label for="em">ไมโครโฟนไร้สาย (ตัว)</label><input id="em" type="number" name="mic" min="1" max="8" value="2"></div>
+  <div id="b-dmic" hidden><label for="em2">ไมโครโฟนตั้งโต๊ะ (ตัว)</label><input id="em2" type="number" name="dmic" min="1" max="12" value="2"></div></div>
+  <div id="b-photo" hidden class="f2"><div><label for="eph">จำนวนช่างภาพ (คน)</label><input id="eph" type="number" name="photoN" min="1" max="4" value="1"></div>
+  <div><label>ลักษณะงานที่ต้องการ</label><div class="chk"><label><input type="checkbox" name="pt" value="ภาพนิ่ง" checked>ภาพนิ่ง</label><label><input type="checkbox" name="pt" value="วิดีโอ">วิดีโอ</label></div></div></div>
+  <label for="en">หมายเหตุถึงงานโสตฯ</label><input id="en" type="text" name="note" placeholder="เช่น ประชุมออนไลน์ผ่าน Zoom"></fieldset>
+  <fieldset><legend>3 · รถตู้ (ถ้าต้องใช้)</legend>
+  <div class="chk" style="margin-top:8px"><label><input type="checkbox" name="needVan" onchange="document.getElementById('vanbox').hidden=!this.checked">ต้องการรถตู้สำหรับงานนี้</label></div>
+  <div id="vanbox" hidden><label for="ev">ปลายทาง/ภารกิจ</label><input id="ev" type="text" name="dest" placeholder="เช่น รับวิทยากรจากสนามบิน">
+  <p class="mute" style="margin:6px 0 0">ระบบจะสร้างคำขอใช้รถในวันและเวลาเดียวกันให้อัตโนมัติ โดยเลือกคันที่ว่าง (ไม่รวมรถผู้บริหาร) หากเหลือไม่ถึง ${VAN_LEAD} วัน คำขอรถจะถูกระบุเป็นกรณีเร่งด่วน</p></div></fieldset>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ส่งคำขอจอง</button></div></form>`);chkEvent($('#sheet form'))}
+function evProblem(f){const room=fval(f,'room'),R=ROOMS[room],p=+fval(f,'people'),s=fval(f,'start'),e=fval(f,'end'),seat=fval(f,'seat');
+  if(s>=e)return 'เวลาสิ้นสุดต้องหลังเวลาเริ่ม';
+  if(p>R.cap[seat])return `${R.name}รองรับได้สูงสุด ${R.cap[seat]} คน${room==='yon'&&seat==='chair'&&p<=300?' หากนั่งเก้าอี้ กรุณาเปลี่ยนเป็นนั่งพื้น (ได้ถึง 300 คน)':room==='sar'?' กรุณาเลือกห้องประชุมยลนที':''}`;
+  const c=evClash(room,fval(f,'date'),s,e);if(c)return `${R.name}ไม่ว่าง มีงาน "${c.title}" เวลา ${c.start}–${c.end} น.`;
+  const av=avSel(f);
+  if(av.length&&fval(f,'date')<day(AV_LEAD))return `อุปกรณ์โสตฯ และช่างภาพต้องแจ้งล่วงหน้าอย่างน้อย ${AV_LEAD} วัน กรุณาเลือกวันอื่น หรือไม่ขอใช้อุปกรณ์`;
+  if(av.includes('ช่างภาพ')&&!f.querySelector('[name=pt]:checked'))return 'กรุณาระบุว่าต้องการให้ช่างภาพบันทึกภาพนิ่งหรือวิดีโอ';
+  return ''}
+const avSel=f=>[...f.querySelectorAll('[name=av]:checked')].map(x=>x.value);
+function chkEvent(f){const pr=evProblem(f),p=+fval(f,'people'),av=avSel(f);
+  $('#b-mic').hidden=!av.includes('ไมโครโฟนไร้สาย');$('#b-dmic').hidden=!av.includes('ไมโครโฟนตั้งโต๊ะ');$('#b-photo').hidden=!av.includes('ช่างภาพ');
+  $('#evmsg').innerHTML=pr?`<div class="msg bad">${esc(pr)}</div>`:`<div class="msg ok">ห้องว่างในช่วงเวลานี้ จองได้</div>${fval(f,'room')==='yon'&&p<=35?'<div class="msg info">ผู้เข้าร่วมไม่เกิน 35 คน ห้องประชุมสราญชลก็เพียงพอ</div>':''}`}
+function sEvent(e){e.preventDefault();const f=e.target,pr=evProblem(f);if(pr){toast(pr);return false}
+  const av=avSel(f);
+  const x={id:newId('E'),title:fval(f,'title'),room:fval(f,'room'),date:fval(f,'date'),start:fval(f,'start'),end:fval(f,'end'),people:+fval(f,'people'),seat:fval(f,'seat'),av,mic:+fval(f,'mic')||1,dmic:+fval(f,'dmic')||1,photoN:+fval(f,'photoN')||1,photoType:[...f.querySelectorAll('[name=pt]:checked')].map(x=>x.value),note:fval(f,'note'),by:me.id,status:'รออนุมัติ',created:TODAY};
+  let extra='';
+  if(fld(f,'needVan').checked){const s=x.date+'T'+x.start,en=x.date+'T'+x.end,free=Object.keys(VANS).find(k=>!VANS[k].exec&&!vanClash(+k,s,en));
+    if(free){const v={id:newId('V'),van:+free,start:s,end:en,dest:fval(f,'dest')||x.title,people:1,purpose:x.title,by:me.id,status:'รออนุมัติ',created:TODAY,urgent:x.date<day(VAN_LEAD),reason:x.date<day(VAN_LEAD)?'ขอพร้อมการจองห้องประชุม':''};DB.vans.push(v);x.vanId=v.id;extra=` และคำขอรถ ${v.id}`}
+    else extra=' (รถตู้ไม่ว่างในช่วงนี้ จึงยังไม่ได้จองรถ)'}
+  DB.events.push(x);save();closeModal();cal.sel=x.date;cal.ym=x.date.slice(0,7);tab.event='mine';render();toast(`ส่งคำขอ ${x.id}${extra} แล้ว`);return false}
+
+/* ---------- 4) จองรถ ---------- */
+const vanClash=(van,s,e)=>DB.vans.find(x=>x.van===van&&x.status!=='ไม่อนุมัติ'&&s<x.end&&x.start<e);
+const vanOn=ds=>DB.vans.filter(x=>x.status!=='ไม่อนุมัติ'&&x.start.slice(0,10)<=ds&&ds<=x.end.slice(0,10));
+function pVan(){
+  const on=vanOn(cal.sel), f=tab.van||(isAdmin()?'wait':'mine');
+  const list=DB.vans.filter(x=>f==='mine'?x.by===me.id:f==='wait'?x.status==='รออนุมัติ':x.end.slice(0,10)>=TODAY).sort((a,b)=>a.start.localeCompare(b.start));
+  $('#main').innerHTML=`<div class="head"><div><h1>จองรถโรงเรียน</h1><p>ดูคิวรถตู้ทั้ง 3 คันและเลขทะเบียนได้ที่นี่ ควรแจ้งล่วงหน้าอย่างน้อย ${VAN_LEAD} วัน ยกเว้นกรณีเร่งด่วน</p></div>
+    <button class="btn pri" onclick="fVan()">${ic('plus')} ขอใช้รถ</button></div>
+  <div class="two"><div class="card">${calendar(ds=>[...new Set(vanOn(ds).map(x=>VANS[x.van].color))])}
+    <div class="legend">${Object.values(VANS).map(v=>`<span><i style="background:${v.color}"></i>${v.name}</span>`).join('')}</div></div>
+  <div class="card"><h2>${thLong(cal.sel)}</h2>
+    ${Object.entries(VANS).map(([k,v])=>{const l=on.filter(x=>x.van===+k);return `<h3 style="margin:12px 0 6px">${v.name} <span class="mute" style="font-weight:400">${v.plate} · ${v.seat} ที่นั่ง${v.exec?' · ใช้เมื่อจำเป็นจริง ๆ':''}</span></h3>${l.length?l.map(x=>`<div class="slot" style="border-color:${v.color}"><b>${thDT(x.start)} – ${thDT(x.end)}</b><br>${esc(x.dest)} ${stTag(x.status)}</div>`).join(''):'<div class="msg ok">ว่างทั้งวัน</div>'}`}).join('')}
+    <div class="acts"><button class="btn sm yel" onclick="fVan('${cal.sel}')">ขอใช้รถวันนี้</button></div></div></div>
+  ${tabsHtml('van',isAdmin()?[['wait','รออนุมัติ'],['up','คิวรถทั้งหมด'],['mine','ที่ฉันจอง']]:[['mine','ที่ฉันจอง'],['up','คิวรถทั้งหมด']])}
+  ${list.length?list.map(x=>`<div class="card"><div class="row sp"><span><span class="id">${x.id}</span> <span class="tag t-gray">${VANS[x.van].name} · ${VANS[x.van].plate}</span> ${x.urgent?'<span class="tag t-bad">เร่งด่วน</span>':''}</span>${stTag(x.status)}</div>
+    <h2 style="margin-top:6px">${esc(x.dest)}</h2><div class="mute">${thDT(x.start)} ถึง ${thDT(x.end)} · ผู้โดยสาร ${x.people} คน · ${esc(x.purpose)} · ขอโดย ${esc(user(x.by).name)}</div>${x.reason?`<div class="mute"><b>เหตุผลความจำเป็น:</b> ${esc(x.reason)}</div>`:''}
+    ${isDepGA()&&x.status==='รออนุมัติ'?`<div class="acts"><button class="btn sm ok" onclick="setSt('vans','${x.id}','อนุมัติ')">อนุมัติ</button><button class="btn sm no" onclick="setSt('vans','${x.id}','ไม่อนุมัติ')">ไม่อนุมัติ</button></div>`:''}
+    ${x.by===me.id&&x.status==='รออนุมัติ'?`<div class="acts"><button class="btn sm no" onclick="cancelReq('vans','${x.id}')">ยกเลิกคำขอ</button></div>`:''}</div>`).join(''):'<div class="card empty">ไม่มีรายการ</div>'}`;
+}
+function fVan(d){const dd=d&&d>=TODAY?d:day(VAN_LEAD);openModal(`<h2>ขอใช้รถโรงเรียน</h2><form onsubmit="return sVan(event)" oninput="chkVan(this)">
+  <div class="f2"><div><label for="vs">ออกเดินทาง</label><input id="vs" type="datetime-local" name="start" value="${dd}T08:00" required></div>
+  <div><label for="ve">กลับถึงโรงเรียน</label><input id="ve" type="datetime-local" name="end" value="${dd}T16:00" required></div></div>
+  <label for="vd">สถานที่ปลายทาง</label><input id="vd" type="text" name="dest" required>
+  <div class="f2"><div><label for="vp">จำนวนผู้โดยสาร</label><input id="vp" type="number" name="people" min="1" max="11" value="5" required></div>
+  <div><label for="vv">เลือกรถ</label><select id="vv" name="van"></select></div></div>
+  <label for="vu">วัตถุประสงค์</label><input id="vu" type="text" name="purpose" required>
+  <div class="chk" style="margin-top:10px"><label><input type="checkbox" name="urgent">กรณีเร่งด่วน (แจ้งล่วงหน้าไม่ถึง ${VAN_LEAD} วัน)</label></div>
+  <div id="b-reason" hidden><label for="vr">เหตุผลความจำเป็น</label><input id="vr" type="text" name="reason" placeholder="ระบุเหตุผลเพื่อประกอบการพิจารณาอนุมัติ"></div>
+  <div id="vanmsg"></div>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ส่งคำขอใช้รถ</button></div></form>`);chkVan($('#sheet form'))}
+function vanState(f){const s=fval(f,'start'),e=fval(f,'end'),p=+fval(f,'people');
+  const ok=Object.keys(VANS).filter(k=>s<e&&!vanClash(+k,s,e)&&p<=VANS[k].seat);
+  return {s,e,p,ok,late:s.slice(0,10)<day(VAN_LEAD),urgent:fld(f,'urgent').checked}}
+function vanProblem(f,st){const van=VANS[fld(f,'van').value];
+  if(st.s>=st.e)return 'เวลากลับต้องหลังเวลาออกเดินทาง';
+  if(!st.ok.length)return 'ช่วงเวลานี้ไม่มีรถว่างที่มีที่นั่งเพียงพอ กรุณาเลือกเวลาอื่นหรือลดจำนวนผู้โดยสาร';
+  if(st.late&&!st.urgent)return `ควรแจ้งล่วงหน้าอย่างน้อย ${VAN_LEAD} วัน หากจำเป็นเร่งด่วน ให้เลือก "กรณีเร่งด่วน" และระบุเหตุผล`;
+  if((st.urgent||(van&&van.exec))&&!fval(f,'reason'))return van&&van.exec?'รถผู้บริหารใช้ได้เมื่อจำเป็นจริง ๆ กรุณาระบุเหตุผลความจำเป็น':'กรุณาระบุเหตุผลความจำเป็นของกรณีเร่งด่วน';
+  return ''}
+function chkVan(f){const st=vanState(f),sel=fld(f,'van'),cur=sel.value;
+  sel.innerHTML=Object.entries(VANS).map(([k,v])=>{const busy=!(st.s<st.e)||vanClash(+k,st.s,st.e);
+    return `<option value="${k}" ${st.ok.includes(k)?'':'disabled'}>${v.name} ${v.plate} (${busy?'ไม่ว่าง':st.p>v.seat?`ที่นั่งไม่พอ รับได้ ${v.seat}`:`ว่าง · ${v.seat} ที่นั่ง`})</option>`}).join('');
+  sel.value=st.ok.includes(cur)?cur:(st.ok[0]||'');
+  const ex=VANS[sel.value]&&VANS[sel.value].exec;
+  $('#b-reason').hidden=!(st.urgent||ex);
+  const pr=vanProblem(f,st);
+  $('#vanmsg').innerHTML=pr?`<div class="msg bad">${esc(pr)}</div>`:`<div class="msg ok">จองได้ ช่วงเวลานี้มีรถที่ใช้ได้ ${st.ok.length} คัน</div>`+(ex?'<div class="msg info">คุณเลือกรถผู้บริหาร ซึ่งปกติสงวนไว้สำหรับผู้บริหาร คำขอจะได้รับการพิจารณาเป็นกรณีพิเศษ</div>':'')}
+function sVan(e){e.preventDefault();const f=e.target,st=vanState(f),van=+fld(f,'van').value,pr=vanProblem(f,st);
+  if(pr||!van){chkVan(f);toast(pr||'กรุณาเลือกรถ');return false}
+  const v={id:newId('V'),van,start:st.s,end:st.e,dest:fval(f,'dest'),people:st.p,purpose:fval(f,'purpose'),by:me.id,status:'รออนุมัติ',created:TODAY,urgent:st.late,reason:(st.urgent||VANS[van].exec)?fval(f,'reason'):''};
+  DB.vans.push(v);save();closeModal();cal.sel=st.s.slice(0,10);cal.ym=st.s.slice(0,7);tab.van='mine';render();toast(`ส่งคำขอ ${v.id} แล้ว รอรองฯ กลุ่มบริหารทั่วไปอนุมัติ`);return false}
+
+/* ---------- 5) สารบรรณ ---------- */
+let dq='';
+function canSee(d){return !isTeacher()||d.to.includes(me.id)}
+function pDocs(){
+  const q=dq.toLowerCase(), f=tab.docs||'in', hit=a=>!q||a.join(' ').toLowerCase().includes(q);
+  const unD=isTeacher()?DB.docs.filter(d=>d.to.includes(me.id)&&!d.read[me.id]).length:0, unM=isTeacher()?DB.minutes.filter(m=>!m.read[me.id]).length:0;
+  const html=f==='min'
+    ? DB.minutes.filter(m=>hit([m.no,m.title,m.summary])).sort((a,b)=>b.date.localeCompare(a.date)).map(minCard).join('')
+    : DB.docs.filter(canSee).filter(d=>hit([d.no,d.subject,d.from,d.group])).sort((a,b)=>b.date.localeCompare(a.date)).map(docCard).join('');
+  $('#main').innerHTML=`<div class="head"><div><h1>งานสารบรรณ</h1><p>${isTeacher()?'หนังสือราชการและรายงานการประชุม เปิดอ่านและค้นย้อนหลังได้ตลอด':'ติดตามเส้นทางหนังสือ รายงานการประชุม และดูว่าใครเปิดอ่านแล้ว'}</p></div>
+    ${isStaff()?(f==='min'?`<button class="btn pri" onclick="fMin()">${ic('plus')} ลงรายงานการประชุม</button>`:`<button class="btn pri" onclick="fDoc()">${ic('plus')} ลงรับหนังสือ</button>`):''}</div>
+  ${tabsHtml('docs',[['in','หนังสือราชการ'+(unD?` (${unD})`:'')],['min','รายงานการประชุม'+(unM?` (${unM})`:'')]])}
+  <input type="search" id="dq" placeholder="${f==='min'?'ค้นหาครั้งที่ประชุม หรือคำในสาระสำคัญ':'ค้นหาเลขที่หนังสือ เรื่อง หรือหน่วยงาน'}" value="${esc(dq)}" oninput="dq=this.value;pDocs();const i=document.getElementById('dq');i.focus();i.setSelectionRange(dq.length,dq.length)" aria-label="ค้นหา" style="margin-bottom:12px">
+  ${html||'<div class="card empty">ไม่พบรายการ</div>'}`;
+}
+/* รายงานการประชุมโรงเรียน: เรียงตามรอบการประชุม ครูทุกคนเห็น */
+const TEACHERS=()=>USERS.filter(u=>u.role==='teacher');
+function minCard(m){const T=TEACHERS(),rc=T.filter(u=>m.read[u.id]).length,unread=isTeacher()&&!m.read[me.id];
+  return `<div class="card" style="${unread?'border-left:4px solid var(--yellow)':''}"><div class="row sp"><span><span class="id">ครั้งที่ ${esc(m.no)}</span> ${unread?'<span class="tag t-wait">ยังไม่ได้อ่าน</span>':isTeacher()?'<span class="tag t-ok">อ่านแล้ว</span>':''}</span><span class="mute">ประชุมเมื่อ ${thDate(m.date)}</span></div>
+  <h2 style="margin-top:6px">รายงานการ${esc(m.title)} ครั้งที่ ${esc(m.no)}</h2>
+  ${m.summary?`<div class="mute"><b>สาระสำคัญ:</b> ${esc(m.summary)}</div>`:''}
+  ${isTeacher()?'':`<div class="etabox">ครูเปิดอ่านแล้ว <b>${rc}/${T.length}</b> คน${rc<T.length?' · ยังไม่อ่าน: '+T.filter(u=>!m.read[u.id]).map(u=>esc(u.name)).join(', '):''}</div>`}
+  <div class="acts"><button class="btn sm" onclick="openMin('${m.id}')">${ic('clip')} ${esc(m.file)}</button></div></div>`}
+function openMin(id){const m=DB.minutes.find(x=>x.id===id);if(!m.read[me.id]){m.read[me.id]=TODAY;save();render()}
+  openModal(`<h2>รายงานการ${esc(m.title)} ครั้งที่ ${esc(m.no)}</h2><p class="mute">ประชุมเมื่อ ${thLong(m.date)}</p>
+  <div class="card" style="background:#f6f8fc;text-align:center;padding:34px 12px">${ic('doc')}<br><b>${esc(m.file)}</b><br><span class="mute">ในระบบจริง ไฟล์นี้จะเปิดจาก Google Drive ของโรงเรียน และไม่มีวันหมดอายุ</span></div>
+  ${m.summary?`<p><b>สาระสำคัญ:</b> ${esc(m.summary)}</p>`:''}<div class="msg ok">บันทึกว่าคุณเปิดอ่านแล้วเมื่อ ${thDate(m.read[me.id])}</div>
+  <div class="foot"><button class="btn pri" onclick="closeModal()">ปิด</button></div>`)}
+function fMin(){const y=new Date().getFullYear()+543,n=DB.minutes.filter(m=>m.no.endsWith('/'+y)).length+1;
+  openModal(`<h2>ลงรายงานการประชุม</h2><form onsubmit="return sMin(event)">
+  <div class="f2"><div><label for="mn">ครั้งที่</label><input id="mn" type="text" name="no" value="${n}/${y}" required pattern="\\d+/\\d{4}" title="รูปแบบ ครั้งที่/ปี พ.ศ. เช่น 5/2569"></div>
+  <div><label for="md">วันที่ประชุม</label><input id="md" type="date" name="date" value="${TODAY}" max="${TODAY}" required></div></div>
+  <label for="mt">การประชุม</label><input id="mt" type="text" name="title" value="ประชุมครูและบุคลากร" required>
+  <label for="ms">สาระสำคัญโดยย่อ</label><textarea id="ms" name="summary" rows="3" placeholder="สรุปประเด็นหลัก เพื่อให้ครูเห็นภาพรวมก่อนเปิดไฟล์"></textarea>
+  <label for="mf">ไฟล์รายงานการประชุม (PDF)</label><input id="mf" type="file" name="file" accept=".pdf">
+  <p class="mute" style="margin:6px 0 0">ระบบเสนอเลขครั้งถัดไปของปีให้อัตโนมัติ เมื่อบันทึกแล้วครูทุกคนจะเห็นรายงานนี้ทันที</p>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">เผยแพร่รายงาน</button></div></form>`)}
+function sMin(e){e.preventDefault();const f=e.target,no=fval(f,'no'),fl=fld(f,'file').files[0];
+  if(DB.minutes.some(m=>m.no===no)){toast(`มีรายงานการประชุมครั้งที่ ${no} อยู่แล้ว`);return false}
+  DB.minutes.push({id:newId('M'),no,date:fval(f,'date'),title:fval(f,'title'),summary:fval(f,'summary'),file:fl?fl.name:`รายงานการประชุม_${no.replace('/','-')}.pdf`,read:{},created:TODAY});
+  save();closeModal();render();toast(`เผยแพร่รายงานการประชุมครั้งที่ ${no} แล้ว`);return false}
+function docCard(d){
+  const unread=isTeacher()&&!d.read[me.id], rc=d.to.filter(u=>d.read[u]).length;
+  const act=d.stage===0&&isDepGA()?`<button class="btn sm pri" onclick="fDocOrder('${d.id}')">เกษียนและส่งต่อ</button>`:
+    d.stage===1&&(isStaff()||(me.role==='dep'&&me.group===d.group)||(isDepGA()&&d.group==='กลุ่มบริหารทั่วไป'))?`<button class="btn sm pri" onclick="fDocAssign('${d.id}')">มอบหมายครูผู้เกี่ยวข้อง</button>`:'';
+  return `<div class="card" style="${unread?'border-left:4px solid var(--yellow)':''}"><div class="row sp"><span><span class="id">${esc(d.no)}</span> ${d.urgent!=='ปกติ'?`<span class="tag t-bad">${d.urgent}</span>`:''} ${unread?'<span class="tag t-wait">ยังไม่ได้อ่าน</span>':''}</span>
+    <span class="tag ${d.stage===2?'t-ok':'t-info'}">${DSTAGE[d.stage]}</span></div>
+  <h2 style="margin-top:6px">${esc(d.subject)}</h2>
+  <div class="mute">จาก ${esc(d.from)} · ลงรับ ${thDate(d.date)}${d.group?` · ${esc(d.group)}`:''}</div>
+  ${d.order?`<div class="mute"><b>คำสั่งการ:</b> ${esc(d.order)}</div>`:''}
+  <div class="steps">${['ลงรับ','รองฯ ทั่วไปเกษียน','กลุ่มมอบหมาย','ถึงครู'].map((l,i)=>`<div class="${i<=d.stage+(d.stage===2?1:0)?'done':''} ${i===d.stage+1&&d.stage<2?'now':''}">${l}</div>`).join('')}</div>
+  ${d.stage===2&&!isTeacher()?`<div class="etabox">เปิดอ่านแล้ว <b>${rc}/${d.to.length}</b> คน · ${d.to.map(u=>`${esc(user(u).name)} ${d.read[u]?'✓':'(ยังไม่อ่าน)'}`).join(', ')}</div>`:''}
+  <div class="acts"><button class="btn sm" onclick="openDoc('${d.id}')">${ic('clip')} ${esc(d.file)}</button>${act}</div></div>`;
+}
+function openDoc(id){const d=DB.docs.find(x=>x.id===id);if(d.to.includes(me.id)&&!d.read[me.id]){d.read[me.id]=TODAY;save();render()}
+  openModal(`<h2>${esc(d.subject)}</h2><p class="mute">${esc(d.no)} · จาก ${esc(d.from)} · ลงรับ ${thDate(d.date)}</p>
+  <div class="card" style="background:#f6f8fc;text-align:center;padding:34px 12px">${ic('doc')}<br><b>${esc(d.file)}</b><br><span class="mute">ในระบบจริง ไฟล์นี้จะเปิดจาก Google Drive ของโรงเรียน และไม่มีวันหมดอายุ</span></div>
+  ${d.order?`<p><b>คำสั่งการ:</b> ${esc(d.order)}</p>`:''}${d.read[me.id]?`<div class="msg ok">บันทึกว่าคุณเปิดอ่านแล้วเมื่อ ${thDate(d.read[me.id])}</div>`:''}
+  <div class="foot"><button class="btn pri" onclick="closeModal()">ปิด</button></div>`)}
+function fDoc(){openModal(`<h2>ลงรับหนังสือเข้า</h2><form onsubmit="return sDoc(event)">
+  <div class="f2"><div><label for="dn">เลขที่หนังสือ</label><input id="dn" type="text" name="no" required></div>
+  <div><label for="du">ชั้นความเร็ว</label><select id="du" name="urgent"><option>ปกติ</option><option>ด่วน</option><option>ด่วนที่สุด</option></select></div></div>
+  <label for="df">จากหน่วยงาน</label><input id="df" type="text" name="from" required>
+  <label for="ds">เรื่อง</label><input id="ds" type="text" name="subject" required>
+  <label for="dl">ไฟล์หนังสือ (PDF)</label><input id="dl" type="file" name="file" accept=".pdf,image/*">
+  <p class="mute" style="margin:6px 0 0">เมื่อบันทึก ระบบจะส่งหนังสือไปยังรองฯ กลุ่มบริหารทั่วไปเพื่อพิจารณาทันที</p>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ลงรับและส่งต่อ</button></div></form>`)}
+function sDoc(e){e.preventDefault();const f=e.target,fl=fld(f,'file').files[0];
+  DB.docs.push({id:newId('D'),no:fval(f,'no'),from:fval(f,'from'),subject:fval(f,'subject'),urgent:fval(f,'urgent'),date:TODAY,file:fl?fl.name:'หนังสือแนบ.pdf',stage:0,group:'',order:'',to:[],read:{},created:TODAY});
+  save();closeModal();render();toast('ลงรับแล้ว ส่งถึงรองฯ กลุ่มบริหารทั่วไป');return false}
+function fDocOrder(id){const d=DB.docs.find(x=>x.id===id);openModal(`<h2>เกษียนหนังสือ</h2><p class="mute">${esc(d.subject)}</p><form onsubmit="return sDocOrder(event,'${id}')">
+  <label for="og">ส่งต่อให้กลุ่มบริหาร</label><select id="og" name="group">${GROUPS.map(g=>`<option>${g}</option>`).join('')}</select>
+  <label for="oo">คำสั่งการ</label><textarea id="oo" name="order" rows="3" required placeholder="เช่น มอบกลุ่มบริหารวิชาการดำเนินการ"></textarea>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ส่งต่อ</button></div></form>`)}
+function sDocOrder(e,id){e.preventDefault();const f=e.target,d=DB.docs.find(x=>x.id===id);d.group=fval(f,'group');d.order=fval(f,'order');d.stage=1;save();closeModal();render();toast(`ส่งต่อให้${d.group}แล้ว`);return false}
+function fDocAssign(id){const d=DB.docs.find(x=>x.id===id);openModal(`<h2>มอบหมายครูผู้เกี่ยวข้อง</h2><p class="mute">${esc(d.subject)}</p><form onsubmit="return sDocAssign(event,'${id}')">
+  <label>เลือกครูที่ต้องได้รับหนังสือ</label><div class="row" style="margin-bottom:8px"><button type="button" class="btn sm" onclick="this.form.querySelectorAll('[name=to]').forEach(c=>c.checked=true)">เลือกครูทุกคน</button></div><div class="chk">${USERS.filter(u=>u.role==='teacher').map(u=>`<label><input type="checkbox" name="to" value="${u.id}">${u.name} · ${u.dept}</label>`).join('')}</div>
+  <div class="foot"><button type="button" class="btn" onclick="closeModal()">ยกเลิก</button><button class="btn pri">ส่งถึงครู</button></div></form>`)}
+function sDocAssign(e,id){e.preventDefault();const to=[...e.target.querySelectorAll('[name=to]:checked')].map(x=>x.value);if(!to.length){toast('กรุณาเลือกครูอย่างน้อย 1 คน');return false}
+  const d=DB.docs.find(x=>x.id===id);d.to=to;d.stage=2;save();closeModal();render();toast(`ส่งหนังสือถึงครู ${to.length} คนแล้ว`);return false}
+
+/* ---------- ภาพรวมสำหรับผู้บริหาร ---------- */
+function pDash(){
+  const R=DB.repairs, done=R.filter(x=>x.status===4), open=R.length-done.length;
+  const avg=done.length?(done.reduce((s,x)=>s+(new Date(x.doneAt)-new Date(x.created))/864e5,0)/done.length).toFixed(1):'-';
+  const ym=TODAY.slice(0,7), ev=DB.events.filter(x=>x.date.startsWith(ym)&&x.status!=='ไม่อนุมัติ'), vn=DB.vans.filter(x=>x.start.startsWith(ym)&&x.status!=='ไม่อนุมัติ');
+  const sent=DB.docs.filter(d=>d.stage===2), tot=sent.reduce((s,d)=>s+d.to.length,0), rd=sent.reduce((s,d)=>s+d.to.filter(u=>d.read[u]).length,0);
+  const bar=(l,v,max)=>`<div class="bar"><span>${l}</span><div><i style="width:${max?Math.round(v/max*100):0}%"></i></div><b>${v}</b></div>`;
+  const mx=a=>Math.max(1,...a);
+  const rs=RSTAT.map((s,i)=>R.filter(x=>x.status===i).length), er=Object.keys(ROOMS).map(k=>ev.filter(x=>x.room===k).length), vr=Object.keys(VANS).map(k=>vn.filter(x=>x.van===+k).length);
+  const avc=AV.map(a=>DB.events.filter(x=>x.av.includes(a)).length);
+  $('#main').innerHTML=`<div class="head"><div><h1>ภาพรวมกลุ่มบริหารทั่วไป</h1><p>ข้อมูลสรุปสำหรับผู้บริหารใช้ประกอบการตัดสินใจ</p></div></div>
+  <div class="grid">
+    <div class="card kpi"><b>${open}</b><span>งานซ่อมที่ยังค้าง</span></div>
+    <div class="card kpi"><b>${avg}</b><span>วัน · เวลาซ่อมเฉลี่ย</span></div>
+    <div class="card kpi"><b>${ev.length}</b><span>การจองห้องประชุมเดือนนี้</span></div>
+    <div class="card kpi"><b>${vn.length}</b><span>เที่ยวรถเดือนนี้</span></div>
+    <div class="card kpi"><b>${tot?Math.round(rd/tot*100):0}%</b><span>อัตราการเปิดอ่านหนังสือ</span></div>
+  </div>
+  <div class="two" style="margin-top:12px">
+    <div class="card"><h2>งานซ่อมตามสถานะ</h2>${RSTAT.map((s,i)=>bar(s,rs[i],mx(rs))).join('')}</div>
+    <div class="card"><h2>งานซ่อมตามประเภท</h2>${Object.entries(RCAT).map(([k,l])=>bar(l,R.filter(x=>x.cat===k).length,R.length)).join('')}</div>
+    <div class="card"><h2>การใช้ห้องประชุมเดือนนี้</h2>${Object.values(ROOMS).map((r,i)=>bar(r.name,er[i],mx(er))).join('')}</div>
+    <div class="card"><h2>การใช้รถตู้เดือนนี้</h2>${Object.values(VANS).map((v,i)=>bar(v.name,vr[i],mx(vr))).join('')}</div>
+    <div class="card"><h2>อุปกรณ์โสตฯ ที่ถูกขอใช้</h2>${AV.map((a,i)=>bar(a,avc[i],mx(avc))).join('')}</div>
+    <div class="card"><h2>หนังสือราชการ</h2>${DSTAGE.map((s,i)=>bar(s,DB.docs.filter(d=>d.stage===i).length,DB.docs.length)).join('')}
+      <p class="mute" style="margin:8px 0 0">มีการส่งหนังสือถึงครูแล้ว ${tot} ครั้ง เปิดอ่านแล้ว ${rd} ครั้ง ยังไม่เปิดอ่าน ${tot-rd} ครั้ง</p></div>
+    <div class="card"><h2>การเปิดอ่านรายงานการประชุม</h2>${[...DB.minutes].sort((a,b)=>a.date.localeCompare(b.date)).map(m=>bar(`ครั้งที่ ${esc(m.no)} (${thDate(m.date)})`,TEACHERS().filter(u=>m.read[u.id]).length,TEACHERS().length)).join('')}
+      <p class="mute" style="margin:8px 0 0">จำนวนครูที่เปิดอ่าน จากครูทั้งหมด ${TEACHERS().length} คน</p></div>
+  </div>`;
+}
+
+/* ---------- เริ่มทำงาน ---------- */
+load();
+let saved=null;try{saved=localStorage.getItem(KEY+'-me')}catch(e){}
+me=USERS.find(u=>u.id===saved)||USERS[0];
+$('#who').innerHTML=USERS.map(u=>`<option value="${u.id}" ${u.id===me.id?'selected':''}>${u.name} (${u.role==='teacher'?'ครู':u.role==='staff'?'เจ้าหน้าที่':u.role==='dep_ga'?'รองฯ บริหารทั่วไป':'รองฯ วิชาการ'})</option>`).join('');
+render();
+</script>
+</body>
+</html>
